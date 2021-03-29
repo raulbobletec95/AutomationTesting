@@ -6,6 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 import pageObjects.AuthenticationPage;
 import pageObjects.HomePage;
 import pageObjects.MyAccountPage;
+import pageObjects.RegisterPage;
 
 import java.util.concurrent.TimeUnit;
 
@@ -14,6 +15,7 @@ public class BaseTest {
     public HomePage homePage;
     public AuthenticationPage loginPage;
     public MyAccountPage accountPage;
+    public RegisterPage registerPage;
 
     @Before
     public void setup(){
@@ -24,6 +26,7 @@ public class BaseTest {
         homePage = PageFactory.initElements(driver,HomePage.class);
         loginPage = PageFactory.initElements(driver,AuthenticationPage.class);
         accountPage= PageFactory.initElements(driver,MyAccountPage.class);
+        registerPage= PageFactory.initElements(driver,RegisterPage.class);
 
     }
 
