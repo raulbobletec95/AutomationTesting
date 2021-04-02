@@ -17,5 +17,12 @@ public class MyAccountPage {
     public void verifyPageTitle(String expectedTitle){
        Assert.assertTrue("Expected title wasn't found",expectedTitle.equalsIgnoreCase(pageTitle.getText()));
     }
+
+    @FindBy(xpath = "//*[@class='sf-menu clearfix menu-content sf-js-enabled sf-arrows']//a")
+    private WebElement womenButton;
+
+    public void clickOnWomen(){
+        womenButton.click();
+    }
 }
 

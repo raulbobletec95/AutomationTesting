@@ -1,5 +1,6 @@
 package pageObjects;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +11,9 @@ public class RegisterPage {
     WebDriver webDriver;
     public RegisterPage(WebDriver driver) {
         this.webDriver = driver;
+        //this.webDriver.get("http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation");
     }
+
 
     @FindBy(xpath = "//*[@id='email_create']")
     private WebElement emailRegisterField;
@@ -33,7 +36,7 @@ public class RegisterPage {
     @FindBy(id = "passwd")
     private WebElement passwordField;
 
-//    Select daysDropDown = new Select(webDriver.findElement(By.id("days")));
+
 
     @FindBy(id = "newsletter")
     private WebElement newsLetter;
@@ -61,6 +64,16 @@ public class RegisterPage {
 
     @FindBy(id = "alias")
     private WebElement addressAlias;
+
+    @FindBy(id = "submitAccount")
+    private WebElement registerSubmitButton;
+
+    @FindBy(xpath = "//*[@class='page-heading']")
+    private WebElement pageTitle;
+
+    public void verifyPageTitle(String expectedTitle){
+        Assert.assertTrue("Expected title wasn't found",expectedTitle.equalsIgnoreCase(pageTitle.getText()));
+    }
 
     public void enterRegisterEmailAddress(String expectedEmail){
         emailRegisterField.sendKeys(expectedEmail);
@@ -91,7 +104,18 @@ public class RegisterPage {
     }
 
     public void selectDay(){
-  //      daysDropDown.selectByIndex(2);
+        Select daysDropDown = new Select(webDriver.findElement(By.id("days")));
+        daysDropDown.selectByIndex(2);
+    }
+
+    public void selectMonth(){
+        Select monthDropDown = new Select(webDriver.findElement(By.id("months")));
+        monthDropDown.selectByIndex(5);
+    }
+
+    public void selectYear(){
+        Select yearDropDown = new Select(webDriver.findElement(By.id("years")));
+        yearDropDown.selectByIndex(5);
     }
 
     public void clickOnNews(){
@@ -114,6 +138,11 @@ public class RegisterPage {
         selectCity.sendKeys(expectedCity);
     }
 
+    public void enterState(){
+        Select stateDropDown = new Select(webDriver.findElement(By.id("id_state")));
+        stateDropDown.selectByIndex(4);
+    }
+
     public void enterPostalCode(String expectedPostalCode){
         postalCode.sendKeys(expectedPostalCode);
     }
@@ -128,5 +157,9 @@ public class RegisterPage {
 
     public void enterAliasAddr(String expectedAlias){
         addressAlias.sendKeys(expectedAlias);
+    }
+
+    public void clickRegisterButton(){
+        registerSubmitButton.click();
     }
 }
