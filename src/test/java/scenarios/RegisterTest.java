@@ -1,3 +1,5 @@
+package scenarios;
+
 import org.junit.Test;
 
 public class RegisterTest extends BaseTest{

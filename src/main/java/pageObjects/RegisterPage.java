@@ -11,7 +11,6 @@ public class RegisterPage {
     WebDriver webDriver;
     public RegisterPage(WebDriver driver) {
         this.webDriver = driver;
-        //this.webDriver.get("http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation");
     }
 
 
@@ -35,8 +34,6 @@ public class RegisterPage {
 
     @FindBy(id = "passwd")
     private WebElement passwordField;
-
-
 
     @FindBy(id = "newsletter")
     private WebElement newsLetter;
