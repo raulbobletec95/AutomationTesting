@@ -1,5 +1,6 @@
 package pageObjects;
 
+import com.github.javafaker.Faker;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,8 +8,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.Random;
+
 public class RegisterPage {
     WebDriver webDriver;
+    Faker faker = new Faker();
+
     public RegisterPage(WebDriver driver) {
         this.webDriver = driver;
     }
@@ -68,95 +73,121 @@ public class RegisterPage {
     @FindBy(xpath = "//*[@class='page-heading']")
     private WebElement pageTitle;
 
-    public void verifyPageTitle(String expectedTitle){
-        Assert.assertTrue("Expected title wasn't found",expectedTitle.equalsIgnoreCase(pageTitle.getText()));
+    public void verifyPageTitle(String expectedTitle) {
+        Assert.assertTrue("Expected title wasn't found", expectedTitle.equalsIgnoreCase(pageTitle.getText()));
     }
 
-    public void enterRegisterEmailAddress(String expectedEmail){
+    public void enterRegisterEmailAddress(String expectedEmail) {
         emailRegisterField.sendKeys(expectedEmail);
     }
 
-    public void registerButton(){
+    public void registerButton() {
         registerButton.click();
     }
 
-    public void clickSelectTitle(){
+    public void clickSelectTitle() {
         selectTitle.click();
     }
 
-    public void enterFirstName(String expectedFirstName){
-        personalFirstNameField.sendKeys(expectedFirstName);
+    public void enterFirstName() {
+        personalFirstNameField.sendKeys(faker.name().firstName());
     }
 
-    public void enterLastName(String expectedLastName){
-        personalLastNameField.sendKeys(expectedLastName);
+    public void enterLastName() {
+        personalLastNameField.sendKeys(faker.name().lastName());
     }
 
-    public void enterEmailAddrField(){
+    public void enterEmailAddrField() {
         emailCreateField.click();
     }
 
-    public void enterPassword(String expectedPassword){
+    public void enterPassword(String expectedPassword) {
         passwordField.sendKeys(expectedPassword);
     }
 
-    public void selectDay(){
+    public void selectDay() {
         Select daysDropDown = new Select(webDriver.findElement(By.id("days")));
         daysDropDown.selectByIndex(2);
     }
 
-    public void selectMonth(){
+    public void selectMonth() {
         Select monthDropDown = new Select(webDriver.findElement(By.id("months")));
         monthDropDown.selectByIndex(5);
     }
 
-    public void selectYear(){
+    public void selectYear() {
         Select yearDropDown = new Select(webDriver.findElement(By.id("years")));
         yearDropDown.selectByIndex(5);
     }
 
-    public void clickOnNews(){
+    public void clickOnNews() {
         newsLetter.click();
     }
 
-    public void clickOnOffers(){
+    public void clickOnOffers() {
         specialOffers.click();
     }
 
-    public void enterCompany(String expectedCompany){
-        companyAddr.sendKeys(expectedCompany);
+    public void enterCompany() {
+        companyAddr.sendKeys(faker.company().name());
     }
 
-    public void enterStreetAddr(String expectedAddr){
-        streetAddress.sendKeys(expectedAddr);
+    public void enterStreetAddr() {
+        streetAddress.sendKeys(faker.address().streetAddress());
     }
 
-    public void enterCity(String expectedCity){
-        selectCity.sendKeys(expectedCity);
+    public void enterCity() {
+        selectCity.sendKeys(faker.address().city());
     }
 
-    public void enterState(){
+    public void enterState() {
         Select stateDropDown = new Select(webDriver.findElement(By.id("id_state")));
         stateDropDown.selectByIndex(4);
     }
 
-    public void enterPostalCode(String expectedPostalCode){
-        postalCode.sendKeys(expectedPostalCode);
+    public void enterPostalCode() {
+        postalCode.sendKeys(faker.address().zipCode());
     }
 
-    public void enterAdditionalInfo(String expectedAdditionalInfo){
+    public void enterAdditionalInfo(String expectedAdditionalInfo) {
         additionalInfo.sendKeys(expectedAdditionalInfo);
     }
 
-    public void enterMobile(String expectedMobile){
-        mobilePhone.sendKeys(expectedMobile);
+    public void enterMobile() {
+        mobilePhone.sendKeys(faker.number().digits(9));
     }
 
-    public void enterAliasAddr(String expectedAlias){
-        addressAlias.sendKeys(expectedAlias);
+    public void enterAliasAddr() {
+        addressAlias.sendKeys(faker.address().streetPrefix());
     }
 
-    public void clickRegisterButton(){
+    public void clickRegisterButton() {
         registerSubmitButton.click();
     }
+
+    public String getRandomEmailOrPwd() {
+        String SALTCHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 10) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
+    }
+
+    public String getRandomName() {
+        String SALTCHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 10) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
+    }
+
+
 }

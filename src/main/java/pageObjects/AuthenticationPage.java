@@ -20,8 +20,6 @@ public class AuthenticationPage {
     @FindBy(id = "SubmitLogin")
     private WebElement singInButton;
 
-    // //*[@class='alert alert-danger']/p
-    // //*[@class='alert alert-danger']//li
 
     @FindBy(xpath = "//*[@class='alert alert-danger']//li")
     private WebElement textError;

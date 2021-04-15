@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class MyAccountPage {
     WebDriver webDriver;
+
     public MyAccountPage(WebDriver driver) {
         this.webDriver = driver;
     }
@@ -14,14 +15,15 @@ public class MyAccountPage {
     @FindBy(xpath = "//*[@class='page-heading']")
     private WebElement pageTitle;
 
-    public void verifyPageTitle(String expectedTitle){
-       Assert.assertTrue("Expected title wasn't found",expectedTitle.equalsIgnoreCase(pageTitle.getText()));
-    }
 
     @FindBy(xpath = "//*[@class='sf-menu clearfix menu-content sf-js-enabled sf-arrows']//a")
     private WebElement womenButton;
 
-    public void clickOnWomen(){
+    public void verifyPageTitle(String expectedTitle) {
+        Assert.assertTrue("Expected title wasn't found", expectedTitle.equalsIgnoreCase(pageTitle.getText()));
+    }
+
+    public void clickOnWomen() {
         womenButton.click();
     }
 }

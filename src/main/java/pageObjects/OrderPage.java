@@ -15,6 +15,23 @@ public class OrderPage {
         this.webDriver = driver;
     }
 
+
+
+    @FindBy(xpath = "//*[@class='button btn btn-default standard-checkout button-medium']")
+    private WebElement proceedCheckoutButton2;
+
+    @FindBy(xpath = "//*[@class='button btn btn-default button-medium']")
+    private WebElement proceedCheckoutButton3;
+
+    @FindBy(xpath = "//*[@id='cgv']")
+    private WebElement agreeTermsAndConditionsCheck;
+
+    @FindBy(xpath = "//*[@class='col-xs-12 col-md-6']/p/a")
+    private WebElement paymentBankWire;
+
+    @FindBy(xpath = "//*[@class='box']/p/strong")
+    private WebElement orderConfirmedText;
+
     public void clickOnImage(){
         Actions actions = new Actions(webDriver);
         WebElement image = webDriver.findElement(By.xpath("//*[@class='product-image-container']//a"));
@@ -31,21 +48,6 @@ public class OrderPage {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='layer_cart_cart col-xs-12 col-md-6']/div[4]/a")));
         webDriver.findElement(By.xpath("//*[@class='layer_cart_cart col-xs-12 col-md-6']/div[4]/a")).click();
     }
-
-    @FindBy(xpath = "//*[@class='button btn btn-default standard-checkout button-medium']")
-    private WebElement proceedCheckoutButton2;
-
-    @FindBy(xpath = "//*[@class='button btn btn-default button-medium']")
-    private WebElement proceedCheckoutButton3;
-
-    @FindBy(xpath = "//*[@id='cgv']")
-    private WebElement agreeTermsAndConditionsCheck;
-
-    @FindBy(xpath = "//*[@class='col-xs-12 col-md-6']/p/a")
-    private WebElement paymentBankWire;
-
-    @FindBy(xpath = "//*[@class='box']/p/strong")
-    private WebElement orderConfirmedText;
 
     public void verifyOrderCompletionText(){
         Assert.assertTrue(orderConfirmedText.getText().equals("Your order on My Store is complete."));
